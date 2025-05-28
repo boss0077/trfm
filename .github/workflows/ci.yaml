@@ -86,4 +86,6 @@ jobs:
             git config --global user.name "SudarshanRPGowda"
             git add product-catalog/k8s/deploy.yaml
             git commit -m "Update product catalog image tag to ${{ github.run_id }}"
-            git push origin HEAD:main -f   
+            # Force push to the main branch
+            # This is necessary if the workflow is triggered by a pull request  
+            git push origin main   
