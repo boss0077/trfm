@@ -9,6 +9,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        
         steps:
         - name: checkout code
           uses: actions/checkout@v4
@@ -27,7 +28,7 @@ jobs:
         - name: unit tests
           run: |
             cd product-catalog 
-            go test product-catalog/...
+            go test ./...
 
     code-quality:
         runs-on: ubuntu-latest
