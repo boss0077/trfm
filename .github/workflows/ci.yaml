@@ -82,8 +82,8 @@ jobs:
           
         - name: Commit changes and push
           run: |
-            git config --global user.email "sudarshanrpgowda7@gmail.com""
+            git config --global user.email "sudarshanrpgowda7@gmail.com"
             git config --global user.name "SudarshanRPGowda"
             git add product-catalog/k8s/deploy.yaml
             git commit -m "Update product catalog image tag to ${{ github.run_id }}"
-            git push origin main   
+            git push origin HEAD:main -f   
