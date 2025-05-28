@@ -59,7 +59,7 @@ jobs:
                     context: ./product-catalog
                     file: Dockerfile
                     push: true
-                    tags: ${{ secrets.DOCKER_USERNAME }}/product-catalog-service:${{github.run_id}}
+                    tags: ${{ secrets.DOCKER_USERNAME }}/product-catalog:${{github.run_id}}
 
     updatek8s:
         runs-on: ubuntu-latest
@@ -72,4 +72,12 @@ jobs:
             
         - name: update tag in k8s manifest
           run: |
-            sed -i 's/tag: .*/tag: "${{github.run_id}}"/'
+            sed -i 's/image .*/image: ${{ secrets.DOCKER_USERNAME }}/product-catalog:${{github.run_id}}/' product-catalog/k8s/deploy.yaml
+          
+        - name: Commit changes and push
+          run: |
+            git config --global user.email "sudarshanrpgowda7@gmail.com""
+            git config --global user.name "SudarshanRPGowda"
+            git add product-catalog/k8s/deploy.yaml
+            git commit -m "Update product catalog image tag to ${{ github.run_id }}"
+            git push origin main   
