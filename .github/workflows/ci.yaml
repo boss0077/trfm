@@ -82,10 +82,13 @@ jobs:
           
         - name: Commit changes and push
           run: |
+            git fetch --all
+            git checkout main
             git config --global user.email "sudarshanrpgowda7@gmail.com"
             git config --global user.name "SudarshanRPGowda"
             git add product-catalog/k8s/deploy.yaml
-            git commit -m "Update product catalog image tag to ${{ github.run_id }}"
+            git commit -m "Update product catalog image tag to ${{ github.run_id }}" || echo "Nothing to commit"
             # Force push to the main branch
             # This is necessary if the workflow is triggered by a pull request  
             git push origin main   
+
