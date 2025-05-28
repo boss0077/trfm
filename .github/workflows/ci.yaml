@@ -6,6 +6,10 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: write
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -82,8 +86,6 @@ jobs:
           
         - name: Commit changes and push
           run: |
-            permissions:
-              contents: write
             git fetch --all
             git checkout main
             git config --global user.email "sudarshanrpgowda7@gmail.com"
